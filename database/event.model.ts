@@ -116,7 +116,17 @@ EventSchema.pre('save', async function () {
 
   // Generate slug only if title changed or document is new
   if (event.isModified('title') || event.isNew) {
-    event.slug = generateSlug(event.title);
+    let baseSlug = generateSlug(event.title);
+    let slug = baseSlug;
+    let counter = 0;
+    
+    // Check for existing slugs and append counter if needed
+    const Event = mongoose.model('Event');
+    while (await Event.findOne({ slug, _id: { $ne: event._id } })) {
+      counter++;
+      slug = `${baseSlug}-${counter}`;
+    }
+    event.slug = slug;
   }
 
   // Normalize date to ISO format if it's not already
