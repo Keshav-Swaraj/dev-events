@@ -47,7 +47,8 @@ const EventPageDetails = async ({ params }: { params: Promise<{ slug: string }> 
 
     const { slug } = await params;
     const request = await fetch(`${BASE_URL}/api/events/${slug}`)
-    const { event: { description, organizer, image, overview, location, date, time, mode, agenda, audience, tags } } = await request.json()
+    const { event } = await request.json()
+    const { _id, description, organizer, image, overview, location, date, time, mode, agenda, audience, tags } = event
 
     if (!description) return notFound()
 
@@ -102,7 +103,7 @@ const EventPageDetails = async ({ params }: { params: Promise<{ slug: string }> 
                             <p className='text-sm'>Be the first to book your spot!</p>
                         )}
 
-                        <BookEvent />
+                        <BookEvent eventId={_id} slug={slug} />
                     </div>
                 </aside>
             </div>
