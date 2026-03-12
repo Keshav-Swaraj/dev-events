@@ -1,11 +1,11 @@
 import React from 'react'
-import {notFound} from "next/navigation";
-import {IEvent} from "@/database";
+import { notFound } from "next/navigation";
+import { IEvent } from "@/database";
 import Image from "next/image";
 import BookEvent from "@/components/BookEvent";
 import EventCard from "@/components/EventCard";
-import {cacheLife} from "next/cache";
-import {getSimilarEventsBySlug} from "@/lib/actions/event.action";
+import { cacheLife } from "next/cache";
+import { getSimilarEventsBySlug } from "@/lib/actions/event.action";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -66,7 +66,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
 
     const { description, image, overview, date, time, location, mode, agenda, audience, tags, organizer } = event;
 
-    if(!description) return notFound();
+    if (!description) return notFound();
 
     const bookings = 10;
 
@@ -117,7 +117,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
                             <p className="text-sm">
                                 Join {bookings} people who have already booked their spot!
                             </p>
-                        ): (
+                        ) : (
                             <p className="text-sm">Be the first to book your spot!</p>
                         )}
 
