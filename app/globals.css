@@ -214,6 +214,8 @@
           @apply flex flex-col gap-2;
 
           ul {
+            @apply list-disc pl-5;
+
             li {
               @apply text-light-100 text-lg max-sm:text-sm;
             }
