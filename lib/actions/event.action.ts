@@ -3,17 +3,6 @@
 import Event from "@/database/event.model"
 import connectDB from "../mongodb"
 
-export const getEventBySlug = async (slug: string) => {
-    try {
-        await connectDB()
-        const event = await Event.findOne({ slug: slug.trim().toLowerCase() }).lean()
-        if (!event) return null
-        return JSON.parse(JSON.stringify(event))
-    } catch {
-        return null
-    }
-}
-
 export const getSimilarEventsBySlug = async (slug: string) => {
     try {
         await connectDB()
